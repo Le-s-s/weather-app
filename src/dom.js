@@ -41,7 +41,30 @@ const dom = (function () {
     });
   };
 
-  return { createDom, watchInput };
+  const injectApi = function (obj){
+    const display = document.querySelector(".display")
+    Object.keys(obj).forEach(key => {
+      const object = document.createElement("div")
+      object.classList.add(`${key}`)
+      object.classList.add("card")
+
+      const name = document.createElement("h1")
+      name.textContent = `${key}`
+
+      const value = document.createElement("h2")
+      value.textContent = `${obj[key]}`
+
+      object.appendChild(name)
+      object.appendChild(value)
+      display.appendChild(object)
+
+      console.log(obj[key])
+    });
+    
+
+  }
+
+  return { createDom, watchInput, injectApi };
 })();
 
 export default dom;
