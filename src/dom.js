@@ -29,7 +29,7 @@ const dom = (function () {
   const watchInput = function (weatherJson) {
     const button = document.querySelector("button");
     const input = document.querySelector("input");
-    
+
     console.log(input.textContent);
     button.addEventListener("click", (event) => {
       if (input !== "") {
@@ -37,32 +37,48 @@ const dom = (function () {
       } else {
         return Error;
       }
-      
     });
   };
 
-  const injectApi = function (obj){
-    const display = document.querySelector(".display")
-    Object.keys(obj).forEach(key => {
-      const object = document.createElement("div")
-      object.classList.add(`${key}`)
-      object.classList.add("card")
+  const injectApi = function (obj) {
+    const display = document.querySelector(".display");
 
-      const name = document.createElement("h1")
-      name.textContent = `${key}`
+    Object.keys(obj).forEach((key) => {
+      const card = document.createElement("div");
+      card.classList.add("card");
 
-      const value = document.createElement("h2")
-      value.textContent = `${obj[key]}`
+      const title = document.createElement("h3");
+      title.textContent = key;
 
-      object.appendChild(name)
-      object.appendChild(value)
-      display.appendChild(object)
+      card.appendChild(title);
 
-      console.log(obj[key])
+      const value = obj[key];
+      
+      if (value === null) {
+        const text = document.createElement("h2");
+        text.textContent = "null";
+        card.appendChild(text);
+      
+      } else if (Array.isArray(value)) {
+        value.forEach((item, index) => {
+          if (typeof item === "object") {
+            injectApi(item);
+          } else {
+            const text = document.createElement("h2");
+            text.textContent = `${value}`;
+            card.appendChild(text)
+          }
+        });
+      } else if (typeof value === "object" && value !== null) {
+        injectApi(value);
+      } else {
+        const text = document.createElement("h2");
+        text.textContent = `${value}`;
+        card.appendChild(text)
+      }
+      display.appendChild(card);
     });
-    
-
-  }
+  };
 
   return { createDom, watchInput, injectApi };
 })();
