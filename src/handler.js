@@ -6,8 +6,11 @@ const handler = (function () {
     dom.createDom();
     dom.watchInput(async (zipCode) => {
       const apiObj = await api.weatherJson(zipCode);
-      const display = document.querySelector(".display")
-      display.innerHTML =""
+      const tempData = api.findData(apiObj);
+      const displayData = new api.dataObject(tempData)
+      console.log(tempData)
+      const display = document.querySelector(".display");
+      display.innerHTML = "";
       dom.injectApi(apiObj);
     });
   };
