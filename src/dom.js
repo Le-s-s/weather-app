@@ -43,41 +43,7 @@ const dom = (function () {
   const injectApi = function (obj) {
     const display = document.querySelector(".display");
 
-    Object.keys(obj).forEach((key) => {
-      const card = document.createElement("div");
-      card.classList.add("card");
-
-      const title = document.createElement("h3");
-      title.textContent = key;
-
-      card.appendChild(title);
-
-      const value = obj[key];
-      
-      if (value === null) {
-        const text = document.createElement("h2");
-        text.textContent = "null";
-        card.appendChild(text);
-      
-      } else if (Array.isArray(value)) {
-        value.forEach((item, index) => {
-          if (typeof item === "object") {
-            injectApi(item);
-          } else {
-            const text = document.createElement("h2");
-            text.textContent = `${value}`;
-            card.appendChild(text)
-          }
-        });
-      } else if (typeof value === "object" && value !== null) {
-        injectApi(value);
-      } else {
-        const text = document.createElement("h2");
-        text.textContent = `${value}`;
-        card.appendChild(text)
-      }
-      display.appendChild(card);
-    });
+    
   };
 
   return { createDom, watchInput, injectApi };
