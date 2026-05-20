@@ -42,8 +42,21 @@ const dom = (function () {
 
   const injectApi = function (obj) {
     const display = document.querySelector(".display");
-
-    
+    Object.keys(obj).forEach((key) => {
+      if (typeof obj[key] !== "object") {
+        const value = obj[key];
+        const card = document.createElement("div");
+        card.classList.add(`${key}`);
+        card.classList.add(`card`);
+        const h1 = document.createElement("h1");
+        h1.textContent = `${key}`;
+        const h2 = document.createElement("h2");
+        h2.textContent = `${value}`;
+        card.appendChild(h1);
+        card.appendChild(h2);
+        display.appendChild(card);
+      }
+    });
   };
 
   return { createDom, watchInput, injectApi };
