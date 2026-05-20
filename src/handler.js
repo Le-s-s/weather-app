@@ -8,10 +8,10 @@ const handler = (function () {
       const apiObj = await api.weatherJson(zipCode);
       const tempData = api.findData(apiObj);
       const displayData = new api.dataObject(tempData)
-      console.log(tempData)
+      console.log(displayData)
       const display = document.querySelector(".display");
       display.innerHTML = "";
-      dom.injectApi(apiObj);
+      dom.injectApi(displayData);
     });
   };
 
