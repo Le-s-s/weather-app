@@ -1,48 +1,90 @@
-*{
-    padding: 0;
-    margin: 0;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-
-
-body{
-    height: 100vh;
-    width: 100vw;
-    background-color: cyan;
+body {
+  height: 100vh;
+  width: 100vw;
+  background-color: cyan;
 }
 
-.container{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
+body.cold {
+  background-color: darkcyan;
 }
 
-.ui{
-    background-color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 20%;
-    width: 100%;
+body.warm {
+  background-color: darkred;
 }
 
-.ui>button{
-    height: 50%;
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
-.ui>input{
-    height: 50%;
+.ui {
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+  width: 100%;
 }
 
-.display{
-    display: grid;
-    grid-template-rows:1fr 1fr 1fr;
-    grid-template-columns:1fr 1fr 1fr;
-    grid-gap: 2vw;
-    width: 100%;
-    height: 80%;
+.ui.cold {
+  background-color: white;
 }
-.card{
-    background-color: white;
+
+.ui.warm {
+  background-color: grey;
+}
+
+.ui > button {
+  height: 50%;
+}
+
+.ui > button.cold {
+  height: 50%;
+  background-color: aqua;
+  color: black;
+}
+
+.ui > button.warm {
+  height: 50%;
+  background-color: red;
+  color: black;
+}
+
+.ui > input {
+  height: 50%;
+}
+
+.ui > input.cold {
+  height: 50%;
+  background-color: aqua;
+  color: black;
+}
+
+.ui > input.warm {
+  height: 50%;
+  background-color: red;
+  color: black;
+}
+
+.display {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 80%;
+}
+
+.card.cold {
+  background-color: white;
+}
+
+.card.warm {
+  background-color: yellow;
 }
