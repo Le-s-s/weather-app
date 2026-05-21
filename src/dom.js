@@ -42,19 +42,43 @@ const dom = (function () {
 
   const injectApi = function (obj) {
     const display = document.querySelector(".display");
+    const page = document.querySelectorAll("*");
+    const card = document.createElement("div");
+    card.classList.add(`weather`);
+    card.classList.add(`card`);
+    const h1 = document.createElement("h1");
+    h1.textContent = `Current weather`;
+    card.appendChild(h1);
+    display.appendChild(card);
     Object.keys(obj).forEach((key) => {
       if (typeof obj[key] !== "object") {
         const value = obj[key];
-        const card = document.createElement("div");
-        card.classList.add(`${key}`);
-        card.classList.add(`card`);
-        const h1 = document.createElement("h1");
-        h1.textContent = `${key}`;
         const h2 = document.createElement("h2");
-        h2.textContent = `${value}`;
-        card.appendChild(h1);
+        if (key === "temp") {
+          h2.textContent = `The  current temperature is ${value}F`;
+          if (value > 65) {
+            page.forEach((element) => {
+              element.classList.add(`warm`);
+            });
+            card.classList.add("warm");
+          } else {
+            page.forEach((element) => {
+              element.classList.add(`cold`);
+            });
+            card.classList.add("cold");
+          }
+        }
+        if (key === "precipprob") {
+          h2.textContent = `Chance of precipitation is ${value}%`;
+        }
+        if (key === "conditions") {
+          h2.textContent = `The sky is ${value}`;
+        }
+        if (key === "description") {
+          h2.textContent = `${value}`;
+        }
+
         card.appendChild(h2);
-        display.appendChild(card);
       }
     });
   };
