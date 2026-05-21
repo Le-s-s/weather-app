@@ -1,11 +1,12 @@
+import * as date from "date-fns";
 const api = (function () {
   const dataObject = function (data) {
     const possibleKeys = ["temp", "conditions", "precipprob", "description"];
-    
+
     // Using arrow function here preserves the correct 'this' context
     Object.keys(data).forEach((key) => {
       const value = data[key];
-      
+
       if (possibleKeys.includes(key)) {
         // Dynamically assign the value to its matching key name (e.g., this.temp, this.conditions)
         // If the value is an array, take the first element; otherwise, take the value itself
@@ -16,9 +17,10 @@ const api = (function () {
   };
 
   const weatherJson = async function (zipCode) {
+    const now = date.format(new Date(), "yyyy-MM-dd'T'hh:mm:ss");
     try {
       const weatherApi = await fetch(
-        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${zipCode}/2020-10-19T13:00:00?key=GHJBCBFE4W95FGR7QYMFGVN9F`
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${zipCode}/${now}?key=GHJBCBFE4W95FGR7QYMFGVN9F`
       );
       const weatherData = await weatherApi.text();
       console.log(weatherData);
