@@ -60,12 +60,20 @@ const dom = (function () {
             page.forEach((element) => {
               element.classList.add(`warm`);
             });
+            const icon = import(`./icons/hot.svg`);
+            const image = document.createElement("img");
+            image.src = icon;
+            display.appendChild(image);
             card.classList.add("warm");
           } else {
             page.forEach((element) => {
               element.classList.add(`cold`);
             });
             card.classList.add("cold");
+            const icon = import(`./icons/cold.svg`);
+            const image = document.createElement("img");
+            image.src = icon;
+            display.appendChild(image);
           }
         }
         if (key === "precipprob") {
