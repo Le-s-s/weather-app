@@ -50,30 +50,41 @@ const dom = (function () {
     h1.textContent = `Current weather`;
     card.appendChild(h1);
     display.appendChild(card);
-    Object.keys(obj).forEach((key) => {
+    Object.keys(obj).forEach( async (key) => {
       if (typeof obj[key] !== "object") {
         const value = obj[key];
         const h2 = document.createElement("h2");
         if (key === "temp") {
           h2.textContent = `The  current temperature is ${value}F`;
+          let feel = "";
           if (value > 65) {
             page.forEach((element) => {
-              element.classList.add(`warm`);
+              feel = "hot";
+              element.classList.add(`${feel}`);
+              element.classList.remove('cold')
+              
             });
-            const icon = import(`./icons/hot.svg`);
-            const image = document.createElement("img");
-            image.src = icon;
-            display.appendChild(image);
-            card.classList.add("warm");
           } else {
             page.forEach((element) => {
-              element.classList.add(`cold`);
+              feel = "cold";
+              element.classList.add(`${feel}`);
+              element.classList.remove('hot')
+              
             });
-            card.classList.add("cold");
-            const icon = import(`./icons/cold.svg`);
+          }
+          if (
+            display.classList.contains("hot") ||
+            display.classList.contains("cold")
+          ) {
             const image = document.createElement("img");
-            image.src = icon;
+            const returnImage = getImage(feel);
+
+            console.log(typeof returnImage);
+            image.src = await returnImage;
             display.appendChild(image);
+            image.classList.add(`${feel}`);
+
+            card.classList.add(`${feel}`);
           }
         }
         if (key === "precipprob") {
@@ -90,8 +101,12 @@ const dom = (function () {
       }
     });
   };
+  const getImage = async function (eClass) {
+    const icon = await import(`./icons/${eClass}.svg`);
 
-  return { createDom, watchInput, injectApi };
+    return icon.default;
+  };
+  return { createDom, watchInput, injectApi, getImage };
 })();
 
 export default dom;
