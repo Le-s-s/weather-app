@@ -13,7 +13,7 @@ body.cold {
   background-color: darkcyan;
 }
 
-body.warm {
+body.hot {
   background-color: darkred;
 }
 
@@ -37,7 +37,7 @@ body.warm {
   background-color: white;
 }
 
-.ui.warm {
+.ui.hot {
   background-color: grey;
 }
 
@@ -51,7 +51,7 @@ body.warm {
   color: black;
 }
 
-.ui > button.warm {
+.ui > button.hot {
   height: 50%;
   background-color: red;
   color: black;
@@ -67,7 +67,7 @@ body.warm {
   color: black;
 }
 
-.ui > input.warm {
+.ui > input.hot {
   height: 50%;
   background-color: red;
   color: black;
@@ -85,6 +85,11 @@ body.warm {
   background-color: white;
 }
 
-.card.warm {
+.card.hot {
   background-color: yellow;
+}
+
+img.hot, img.cold {
+  height: 50%;
+  width: 50%;
 }
