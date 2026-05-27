@@ -5,13 +5,20 @@ const handler = (function () {
   const start = function () {
     dom.createDom();
     dom.watchInput(async (zipCode) => {
-      const apiObj = await api.weatherJson(zipCode);
-      const tempData = api.findData(apiObj);
-      const displayData = new api.dataObject(tempData);
-      console.log(displayData);
-      const display = document.querySelector(".display");
-      display.innerHTML = "";
-      dom.injectApi(displayData);
+      try {
+        const apiObj = api.weatherJson(zipCode);
+        dom.loading(apiObj);
+
+        
+        const tempData = api.findData(await apiObj);
+        const displayData = new api.dataObject(tempData);
+        console.log(displayData);
+        const display = document.querySelector(".display");
+        display.innerHTML = "";
+        dom.injectApi(displayData);
+      } catch (error) {
+        console.log(error);
+      }
     });
   };
 
