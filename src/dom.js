@@ -1,4 +1,4 @@
-import "./style.css"
+import "./style.css";
 
 const dom = (function () {
   const createDom = function () {
@@ -50,7 +50,7 @@ const dom = (function () {
     h1.textContent = `Current weather`;
     card.appendChild(h1);
     display.appendChild(card);
-    Object.keys(obj).forEach( async (key) => {
+    Object.keys(obj).forEach(async (key) => {
       if (typeof obj[key] !== "object") {
         const value = obj[key];
         const h2 = document.createElement("h2");
@@ -61,15 +61,13 @@ const dom = (function () {
             page.forEach((element) => {
               feel = "hot";
               element.classList.add(`${feel}`);
-              element.classList.remove('cold')
-              
+              element.classList.remove("cold");
             });
           } else {
             page.forEach((element) => {
               feel = "cold";
               element.classList.add(`${feel}`);
-              element.classList.remove('hot')
-              
+              element.classList.remove("hot");
             });
           }
           if (
@@ -106,7 +104,20 @@ const dom = (function () {
 
     return icon.default;
   };
-  return { createDom, watchInput, injectApi, getImage };
+  const loading = async function (obj) {
+    const display = document.querySelector(".display");
+    display.innerHTML = ""
+    const message = document.createElement("h1");
+    message.textContent = "Loading";
+    display.appendChild(message);
+    const status = obj
+    
+    if(typeof status === "promise"){
+      console.log("is promise")
+      display.remove(message)
+    }
+  };
+  return { createDom, watchInput, injectApi, getImage, loading };
 })();
 
 export default dom;
