@@ -104,17 +104,21 @@ const dom = (function () {
 
     return icon.default;
   };
-  const loading = async function (obj) {
+  const loading = async function (promise) {
     const display = document.querySelector(".display");
-    display.innerHTML = ""
+
+    display.innerHTML = "";
+
     const message = document.createElement("h1");
     message.textContent = "Loading";
     display.appendChild(message);
-    const status = obj
-    
-    if(typeof status === "promise"){
-      console.log("is promise")
-      display.remove(message)
+
+    if (promise instanceof Promise) {
+      console.log("is promise");
+
+      await promise;
+
+      message.remove();
     }
   };
   return { createDom, watchInput, injectApi, getImage, loading };
